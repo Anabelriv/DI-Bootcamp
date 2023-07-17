@@ -46,4 +46,22 @@ for num in range(0,15):
 
 print(f"The number {num} is {result}")
 
+number=1
+while number < 5:
+    number += 1
+    print(number)
+
+bank_amount= 1000
+computer_price= 200
+counter=0
+if bank_amount >= computer_price:
+    bank_amount-=computer_price
+else:
+    print("no money")
+
+while bank_amount >= computer_price:
+    bank_amount-= computer_price
+    counter += 1
+print(f"I bought {counter} computers, I have {bank_amount} money left")
+
 
