@@ -2,6 +2,8 @@
 my_fav_numbers_set = {3,5,7,13}
 my_fav_numbers_set.update([1,32])
 my_fav_numbers_set.discard(13)
+my_fav_numbers_set= list(my_fav_numbers_set)
+my_fav_numbers_set.pop()
 print(my_fav_numbers_set)
 
 friend_fav_numbers= {2345,2039584,2093,8739487,983724}
