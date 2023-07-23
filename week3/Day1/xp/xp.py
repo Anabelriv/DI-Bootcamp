@@ -16,8 +16,8 @@ cat3 = Cat("Mouse", 3)
 
 # Function to find the oldest cat
 def oldest_cat(cats):
-    the_oldest_cat = max(cats, key=lambda cat: cat.age)
-    return the_oldest_cat
+    oldest_cat = max(cats, key=lambda cat: cat.age)
+    return oldest_cat
 
 # List of all cats
 all_cats = [cat1, cat2, cat3]
