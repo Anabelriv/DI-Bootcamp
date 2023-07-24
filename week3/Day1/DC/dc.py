@@ -44,7 +44,13 @@ class Farm:
     def get_animal_types(self):
         return sorted(list(self.animals.keys()))
     
-    def get_short_info(self):
+    def get_short_info(self):  
+        list_keys = self.get_animal_types()
+        for animal_type, count in self.animals.items():
+            if count > 1 :
+                position = list_keys.index(animal_type)
+                list_keys[position]  += "s"
+                
         animal_types = ", ".join(self.get_animal_types())
         return f"{self.name}'s farm has {animal_types}."
     
