@@ -47,13 +47,33 @@
 # show_info(self) : that will print the information of the employee --> name, age, job, salary
 # Call all the methods
 
+
+# implement the gt dunder method that receives 2 different employees, and returns the employee with the highest salary
+# implement the add dunder method that that receives 2 different employees, and returns the total salary of the 2 employees
+# implement the str dunder method that introduce the employee
 class Employee():
+    all_employees = []
     def __init__(self, firstname, lastname, age, job, salary):
         self.first_name = firstname
         self.last_name = lastname
         self.age = age
         self.job = job
         self.salary = salary
+
+    def __str__(self) :
+        return f"the employee {self.first_name}{self.last_name} is {self.age} years old and his job is {self.job} and his salary is {self.salary}"
+    
+    def __repr__(self):
+        return f"{self.first_name} - {self.last_name} - {self.age} - {self.job} - {self.salary}"
+    
+    def __gt__(self, other_employee):
+        if self.salary > other_employee.salary:
+            return self
+        else :
+            return other_employee
+    
+    def __add__(self, other_employee):
+        return self.salary + other_employee.salary
 
     def get_full_name(self):
         return f"{self.first_name} {self.last_name}"
@@ -68,12 +88,21 @@ class Employee():
     def show_info(self):
         print(f"The name is {self.get_full_name()}, the age is {self.age}, the job is {self.job}, the salary is {self.salary}")
 
+    @classmethod
+    def create_best_employee(cls, other_employee):
+        if Employee.salary > other_employee.salary:
+            return cls.all_employees.append(other_employee)
+
+
 user1 = Employee("Lea", "Smith",30,"developer", 45000)
-user2 = Employee("David", "Schartz",20,"teacher", 5000)
+other_employee = Employee("David", "Schartz",20,"teacher", 5000)
 
-user1.show_info()
-user2.show_info()
+# user1.show_info()
+# user2.show_info()
 
+# print(user1)
+# print(user1 > user2)
+# print(user1 + user2)
 # Exercise 2 : Inheritance
 # Create a Developer class, that inherits from the Employee class with the attributes :
 # firstname, lastname, age,
