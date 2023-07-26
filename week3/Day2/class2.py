@@ -51,6 +51,21 @@
 # implement the gt dunder method that receives 2 different employees, and returns the employee with the highest salary
 # implement the add dunder method that that receives 2 different employees, and returns the total salary of the 2 employees
 # implement the str dunder method that introduce the employee
+
+# # Exercise Encapsulation
+# make the address attribute private
+# implement a method that return the address of the employee --> getter
+# implement a method that modifies the address of the employee, only if the employee is older than 30--> setter
+# implement a method create_best_employee that should create a new employee only if their salary is > 30000 --> class method
+
+# Exercise 2
+# Create a Manager class, that inherits from the Employee class With the attributes : firstname, lastname, adress, age, job is manager as default, salary is 45000 by default, list of employees empty by default
+# Create 1 manager object and display his attribute
+# Brad Pitt 50 years old
+# Add those methods to the class
+# add_new_employee(self, new_employee) : adds the new employee object to the list of employees
+# show_employees(self) : show the fullnames of all the employees under the manager
+
 class Employee():
     all_employees = []
     def __init__(self, firstname, lastname, age, job, salary):
@@ -93,10 +108,51 @@ class Employee():
         if Employee.salary > other_employee.salary:
             return cls.all_employees.append(other_employee)
 
+    @property
+    def address(self):
+        return self.__address
+
+    @address.setter
+    def address(self, new_address):
+        if self.age > 30:
+            self.__address = new_address
+
+class Manager(Employee):
+    def __init__(self, firstname, lastname, age, address, job = "Manager", salary = 45000):
+        super().__init__(firstname, lastname, age, job, salary)
+        self.address = address
+        self.employees = []
+
+    def add_new_employee(self, new_employee):
+        self.employees.append(new_employee)
+
+    def show_employees(self):
+        print("Employees under the manager:")
+        for employee in self.employees:
+            print(employee.get_full_name())
+
+
+# Creating a manager object
+manager1 = Manager("Brad", "Pitt", 50, "Los Angeles, CA")
+print(manager1)
+
+# Creating employees
+employee1 = Employee("Lea", "Smith", 30, "developer", 45000)
+employee2 = Employee("David", "Schartz", 20, "teacher", 5000)
+
+# Adding employees to the manager's list
+manager1.add_new_employee(employee1)
+manager1.add_new_employee(employee2)
+
+# Showing the employees under the manager
+manager1.show_employees()
+
 
 user1 = Employee("Lea", "Smith",30,"developer", 45000)
 other_employee = Employee("David", "Schartz",20,"teacher", 5000)
 
+user1.address = "123 Main St"  # Setter will set address only if age is greater than 30
+print(user1.address)  # Getter to access the address
 # user1.show_info()
 # user2.show_info()
 
