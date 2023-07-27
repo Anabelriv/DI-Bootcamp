@@ -1,0 +1,44 @@
+Instructions for the game:
+import the file
+    - game class
+        - class attribute
+        lst_choice =["rock", "paper, "scissors"]
+
+        - init method
+            - attribute results ={
+                draw:0,
+                win: 0,
+                loss : 0
+            }
+        @staticmethod
+        - get_user_item(self)
+            -input method and check if the answer is in the list
+            - try/ except  and check for the possible error
+            - return the lst_choice
+
+        @staticmethod
+        - get_computer_item(self)
+            - use random choice to get a choice for the computer
+
+        - get_game_result(self, user_item, computer_items)
+            - conditions
+            - update the dictionary
+        
+        - play(self):
+            - get_user_item()
+            - get_computer_item()
+            - get_game_relts (user_item, computer_item)
+            - print the result sentence
+            - return the result
+
+
+# rock - paper - scissors
+ - function: get_user_menu_choice
+    - show the user menu
+ 
+ - print results (results)
+
+ - main ()
+    - continue asking until the user made the right choice
+    - create a game object and call the play () method
+
