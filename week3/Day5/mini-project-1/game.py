@@ -94,8 +94,8 @@ class Game:
                 return "Sorry! You lose."
 
     def play(self):
-        user = Game.get_user_item()
-        computer = Game.get_computer_item()
+        user = self.get_user_item()
+        computer = self.get_computer_item()
         result = self.get_game_result(user, computer)
         print(f"Your choice: {user}, Computer's choise: {computer}")
         print(result)

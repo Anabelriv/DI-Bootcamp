@@ -27,11 +27,11 @@ def print_results(results):
     print(f"Number of losses: {results['loss']}")
 
 def main():
-    results = {
-        'draw':0,
-        'win': 0,
-        'loss':0
-    }
+    # results = {
+    #     'draw':0,
+    #     'win': 0,
+    #     'loss':0
+    # }
     
     while True:
         choice = get_user_menu_choice()
