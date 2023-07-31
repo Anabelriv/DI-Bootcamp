@@ -51,3 +51,19 @@
 -- SELECT first_name, last_name FROM students WHERE id IN (1,3);
 
 -- SELECT * from students WHERE birth_Date >= '1/01/2000';
+
+-- SELECT first_name, last_name, birth_date
+-- FROM students
+-- ORDER BY last_name
+-- LIMIT 4;
+-- SELECT first_name, last_name, birth_date
+-- FROM students 
+-- ORDER BY birth_date
+-- LIMIT 1;
+
+-- SELECT first_name, last_name, birth_date
+-- FROM students
+-- ORDER BY last_name
+-- OFFSET 2
+-- LIMIT 3;
+
