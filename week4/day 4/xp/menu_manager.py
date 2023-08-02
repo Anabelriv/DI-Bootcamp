@@ -1,4 +1,3 @@
-import psycopg2
 from menu_item import MenuItem, manage_connection
 
 

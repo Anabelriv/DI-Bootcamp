@@ -15,9 +15,9 @@ def manage_connection(query, type):
         with connection:
             with connection.cursor() as cursor:  # it closes the transaction
                 cursor.execute(query)
-                if type == "insert":
+                if type != "select":
                     connection.commit()
-                elif type == "select":
+                else:
                     return cursor.fetchall()
     except Exception as e:
         print(e)
@@ -37,8 +37,8 @@ class MenuItem:
 
     def delete(self):
         query = f"DELETE FROM Menu_Items WHERE item_name = '{self.name}'"
-        manage_connection(query, "insert")
+        manage_connection(query, "delete")
 
     def update(self, new_name, new_price):
         query = f"UPDATE Menu_Items SET item_name = '{new_name}', item_price = {new_price} WHERE item_name = '{self.name}'"
-        manage_connection(query, "insert")
+        manage_connection(query, "update")
