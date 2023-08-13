@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Post, Author
+from .models import Post, Author, Category
 
 
 # Create your views here.
@@ -10,10 +10,12 @@ def index(request):
 
 
 def post(request, post_id: int):
-    data = {1: "This is the 1st post", 2: "This is the 2nd post"}
-
-    post = data.get(post_id, "No such post")
-    return HttpResponse(post)
+    try:
+        post = Post.objects.get(id=post_id)
+        content = f"AUTHOR:{post.author}| TITLE: {post.title}|Text:{post.text}"
+        return HttpResponse(post, content)
+    except Post.DoesNotExist:
+        return HttpResponse("No such post")
 
 
 def about(request):
@@ -30,3 +32,13 @@ def all_posts(request, author_name):
         return HttpResponse(formatted_posts)
     except Author.DoesNotExist:
         return HttpResponse(f"No posts found for author {author_name}")
+
+
+def category_posts(request, category_id: int):
+    try:
+        category_instance = Category.objects.get(id=category_id)
+        category_posts = category_instance.posts.all()
+        formatted_posts = "\n".join(post.title for post in category_posts)
+        return HttpResponse(formatted_posts)
+    except Category.DoesNotExist:
+        return HttpResponse(f"No posts found for category {category_id}")
