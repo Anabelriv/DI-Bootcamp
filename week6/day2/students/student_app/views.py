@@ -15,7 +15,15 @@ class Student_listView(APIView):
     # permission_classes = (AllowAny, IsAuthenticated)
 
     def get(self, request, *args, **kwargs):
-        students = Student.objects.all()
+        date_joined_param = request.GET.get("date_joined")
+
+        if date_joined_param:
+            # Extract the date part from the datetime string
+            date_joined = date_joined_param.split("T")[0]
+            students = Student.objects.filter(date_joined=date_joined)
+        else:
+            students = Student.objects.all()
+
         serializer = StudentSerializer(students, many=True)
         return Response(serializer.data)
 
@@ -47,8 +55,5 @@ class Student_detailView(APIView):
         return Response(serializer.errors)
 
     def delete(self, request, pk, *args, **kwargs):
-        try:
-            student = Student.objects.get(id=pk)
-            return Response({"message": f"Student id - {pk} DELETED"})
-        except Student.DoesNotExist:
-            return Response(status=status.HTTP_204_NO_CONTENT)
+        student = Student.objects.get(id=pk)
+        return Response(status=status.HTTP_204_NO_CONTENT)
