@@ -9,11 +9,15 @@ from .serializers import (
     ProjectSerializer,
     TaskSerializer,
 )
+from rest_framework.permissions import IsAuthenticated
+from .permissions import IsDepartmentAdmin
 
 # Create your views here.
 
 
 class DepartmentAPIView(APIView):
+    permission_classes = [IsAuthenticated, IsDepartmentAdmin]
+
     def get(self, request, **kwargs):
         id = kwargs.get("pk", None)
         if id is not None:
@@ -50,6 +54,8 @@ class DepartmentAPIView(APIView):
 
 
 class EmployeeAPIView(APIView):
+    permission_classes = [IsAuthenticated, IsDepartmentAdmin]
+
     def get(self, request, **kwargs):
         id = kwargs.get("pk", None)
         if id is not None:
@@ -86,6 +92,8 @@ class EmployeeAPIView(APIView):
 
 
 class ProjectAPIView(APIView):
+    permission_classes = [IsAuthenticated, IsDepartmentAdmin]
+
     def get(self, request, **kwargs):
         id = kwargs.get("pk", None)
         if id is not None:
@@ -122,6 +130,8 @@ class ProjectAPIView(APIView):
 
 
 class TaskAPIView(APIView):
+    permission_classes = [IsAuthenticated, IsDepartmentAdmin]
+
     def get(self, request, **kwargs):
         id = kwargs.get("pk", None)
         if id is not None:
