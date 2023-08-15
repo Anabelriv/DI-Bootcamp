@@ -8,11 +8,13 @@ from rest_framework.response import Response
 
 # Create your views here.
 from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny, IsAuthenticated
+
+from rest_framework.permissions import IsAuthenticated
+from .permissions import ISAuthenticatedAndAdmin
 
 
 class PostView(APIView):
-    permission_classes = (AllowAny, IsAuthenticated)
+    permission_classes = [IsAuthenticated, ISAuthenticatedAndAdmin]
 
     def get(self, request, *args, **kwargs):
         posts = Post.objects.all()

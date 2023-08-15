@@ -56,4 +56,5 @@ class Student_detailView(APIView):
 
     def delete(self, request, pk, *args, **kwargs):
         student = Student.objects.get(id=pk)
+        student.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
