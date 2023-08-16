@@ -1,5 +1,5 @@
 // daily challenge stars
-const height = 6; // Adjust the height as needed
+const height = 6;
 
 for (let i = 1; i <= height; i++) {
     let row = '';
