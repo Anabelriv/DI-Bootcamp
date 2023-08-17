@@ -8,7 +8,7 @@ for (let i = 1; i <= height; i++) {
     }
     console.log(row);
 }
-
+// option 2
 const maxValue = 6;
 let stars = ""
 for (let i = 0; i <= maxValue; i++) {
