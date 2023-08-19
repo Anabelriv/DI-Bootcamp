@@ -2,7 +2,14 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Customer, Vehicle, Rental, RentalStation, VehicleAtRentalStation
+from .models import (
+    Customer,
+    Vehicle,
+    Rental,
+    RentalStation,
+    VehicleAtRentalStation,
+    VehicleType,
+)
 from .serializers import (
     CustomerSerializer,
     VehicleSerializer,
@@ -10,6 +17,8 @@ from .serializers import (
     RentalStationSerializers,
 )
 from rest_framework.permissions import AllowAny
+from django.db.models.functions import TruncMonth
+from django.db.models import Count
 
 
 class RentalAPIView(APIView):
@@ -27,8 +36,10 @@ class RentalAPIView(APIView):
             except Rental.DoesNotExist:
                 return Response(status=status.HTTP_404_NOT_FOUND)
         else:
-            rentals = Rental.objects.order_by("return_date", "rental_date")
-            serializer = RentalSerializers(rentals, many=True)
+            rentals_oredered = Rental.objects.filter(
+                return_date__isnull=False
+            ).order_by("rental_date")
+            serializer = RentalSerializers(rentals_oredered, many=True)
             return Response(serializer.data)
 
     # Post
@@ -207,3 +218,62 @@ class RentalStationAPIView(APIView):
                 return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# Daily Challenge
+# get the rent stats monthly
+
+
+class MonthlyRentalStatsView(APIView):
+    def get(self, request):
+        rental_stats = (
+            Rental.objects.annotate(month=TruncMonth("rental_date"))
+            .values("month")
+            .annotate(rental_count=Count("id"))
+            .order_by("month")
+        )
+
+        monthly_stats = {
+            entry["month"].strftime("%Y-%m"): entry["rental_count"]
+            for entry in rental_stats
+        }
+
+        return Response(monthly_stats)
+
+
+# retrieve a popular rental station
+
+
+class PopularRentalStationView(APIView):
+    def get(self, request):
+        popular_stations = RentalStation.objects.annotate(
+            rental_count=Count("rental")
+        ).order_by("-rental_count")
+
+        popular_station_stats = {
+            station.name: station.rental_count for station in popular_stations
+        }
+
+        return Response(popular_station_stats)
+
+
+# Most popular rented vehicle
+
+
+class PopularVehicleTypeView(APIView):
+    def get(self, request):
+        vehicle_type_stats = VehicleType.objects.annotate(
+            rental_count=Count(
+                Case(
+                    When(vehicle__rental__isnull=False, then=1),
+                    default=0,
+                    output_field=models.IntegerField(),
+                )
+            )
+        ).values("name", "rental_count")
+
+        popular_vehicle_stats = {
+            entry["name"]: entry["rental_count"] for entry in vehicle_type_stats
+        }
+
+        return Response(popular_vehicle_stats)

@@ -16,19 +16,60 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from rent.views import RentalAPIView, CustomerAPIView, VehicleAPIView, RentalStationAPIView
+from rent.views import (
+    RentalAPIView,
+    CustomerAPIView,
+    VehicleAPIView,
+    RentalStationAPIView,
+    MonthlyRentalStatsView,
+    PopularRentalStationView,
+    PopularVehicleTypeView,
+)
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('rent/rental/', RentalAPIView.as_view(), name='rental-list'),
-    path('rent/rental/<int:pk>/', RentalAPIView.as_view(), name='rental-detail'),
-    path('rent/customer/', CustomerAPIView.as_view(), name='customer-list'),
-    path('rent/customer/add/', CustomerAPIView.as_view(), name='customer-add'),
-    path('rent/vehicle/', VehicleAPIView.as_view(), name='vehicle-list'),
-    path('rent/vehicle/add/', VehicleAPIView.as_view(), name='vehicle-add'),
-    path('rent/vehicle/<int:pk>/', VehicleAPIView.as_view(), name='vehicle-detail'),
-    path('rent/station/', RentalStationAPIView.as_view(), name='station-list'),
-    path('rent/station/add/', RentalStationAPIView.as_view(), {'action': 'add'}, name='station-add'),
-    path('rent/station/<int:pk>/', RentalStationAPIView.as_view(), name='station-detail'),
-    path('rent/station/distribution/', RentalStationAPIView.as_view(), {'action': 'distribution'}, name='station-distribution'),
-    path('rent/station/distribute/', RentalStationAPIView.as_view(), {'action': 'distribute'}, name='station-distribute'),
+    path("admin/", admin.site.urls),
+    path("rent/rental/", RentalAPIView.as_view(), name="rental-list"),
+    path("rent/rental/<int:pk>/", RentalAPIView.as_view(), name="rental-detail"),
+    path("rent/customer/", CustomerAPIView.as_view(), name="customer-list"),
+    path("rent/customer/add/", CustomerAPIView.as_view(), name="customer-add"),
+    path("rent/vehicle/", VehicleAPIView.as_view(), name="vehicle-list"),
+    path("rent/vehicle/add/", VehicleAPIView.as_view(), name="vehicle-add"),
+    path("rent/vehicle/<int:pk>/", VehicleAPIView.as_view(), name="vehicle-detail"),
+    path("rent/station/", RentalStationAPIView.as_view(), name="station-list"),
+    path(
+        "rent/station/add/",
+        RentalStationAPIView.as_view(),
+        {"action": "add"},
+        name="station-add",
+    ),
+    path(
+        "rent/station/<int:pk>/", RentalStationAPIView.as_view(), name="station-detail"
+    ),
+    path(
+        "rent/station/distribution/",
+        RentalStationAPIView.as_view(),
+        {"action": "distribution"},
+        name="station-distribution",
+    ),
+    path(
+        "rent/station/distribute/",
+        RentalStationAPIView.as_view(),
+        {"action": "distribute"},
+        name="station-distribute",
+    ),
+    path(
+        "rent/stats/monthly/",
+        MonthlyRentalStatsView.as_view(),
+        name="monthly-rental-stats",
+    ),
+    path(
+        "rent/stats/popular_station/",
+        PopularRentalStationView.as_view(),
+        name="popular-rental-station",
+    ),
+    path(
+        "rent/stats/popular_vehicle_type/",
+        PopularVehicleTypeView.as_view(),
+        name="popular-vehicle-type",
+    ),
 ]
