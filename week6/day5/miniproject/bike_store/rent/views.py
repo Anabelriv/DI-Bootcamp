@@ -148,10 +148,10 @@ class VehicleAPIView(APIView):
 
 class RentalStationAPIView(APIView):
     def get(self, request, **kwargs):
-        id = kwargs.get("pk", None)
-        if id is not None:
+        pk = kwargs.get("pk", None)
+        if pk is not None:
             try:
-                rental_station = RentalStation.objects.get(id=id)
+                rental_station = RentalStation.objects.get(id=pk)
                 vehicles_at_station = VehicleAtRentalStation.objects.filter(
                     station=rental_station
                 )
@@ -159,7 +159,7 @@ class RentalStationAPIView(APIView):
                 # GET distribution stats
                 rental_station_data = RentalStationSerializers(rental_station).data
                 vehicles_data = VehicleAtRentalStation(
-                    vehicles_at_station, many=True
+                    vehicles_at_station  # many=True
                 ).data
 
                 return Response(
@@ -217,7 +217,7 @@ class RentalStationAPIView(APIView):
             except Exception as e:
                 return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 # Daily Challenge
