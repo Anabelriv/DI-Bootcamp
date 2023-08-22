@@ -1,0 +1,163 @@
+// let b = 3, d = b, u = b;
+// const tree = ++d * d * b * b++ +
+//     + --d + + +b-- +
+//     + +d * b + +
+//     u
+// console.log(tree); //163
+
+// 4 * 4 * 3 +
+// 3 + 4 +
+// 3 * 3 +
+// 3
+
+// {
+//     let x = 9;
+// }
+
+// console.log(x)
+// for (var i = 0; i < 5; i++) { }
+// console.log("i=>", i)// it will work
+
+// for (let i = 0; i < 5; i++) { }
+// console.log("i=>", i) //it won't work
+
+// function x() {
+//     let x = 8;
+//     function y() {
+//         let y = 7;
+//         console.log("x=>", x);
+//     }
+// }
+// function getXY(x, y) {
+//     return x + y
+// }
+// let sum = getXY() // not a NaaN
+// console.log(sum)
+
+// let y;
+// let x = 5;
+// if (x < 5) {
+//     y = 10
+// }
+// else {
+//     y = 0
+// }
+// let y = (x < 5) ? 6 : (x === 5) ? 'hi' : 'bye'
+// ? this is if, : and this is else
+
+// let x = 'hello';
+// let y = 'students';
+// let hi = x + " \n" + y;
+// let hii = `${x} ${y}` // this csn br multiline of code 
+
+// function name() {
+
+// }
+// const getXY = function () {
+
+// }
+
+// const getYX = (y, x) => {
+//     return y * x
+// }
+
+// function x() {
+//     let hi = 'hello';
+//     function y() {
+//         console.log(hi);
+//     }
+//     return y;
+// }
+// let sayHi = x()();
+// console.log(sayHi);
+
+// function x(param) {
+//     function y(param1) {
+//         return param + param1
+//     }
+//     return y;
+// }
+// let sum = x(3)(6);
+// console.log("sum?", sum);
+
+// const x = (x) => {
+//     return (y) => {
+//         return x * y
+//     }
+// }
+// const x = (x) => (y) => x * y // this is currying it's the same as above
+// const VAT = 1.17
+// let sum = x(VAT)
+
+// console.log(sum(100));
+
+// This is much more complicated than Currying - COMPOSE
+
+// const x = (a, b) => (c) => a(b(c))
+//const x = (sum2, sum) => (6) => sum2"14"(sum"7"(6))
+
+// const sum2 = (num) => num * 2;
+// const sum = (num) => num + 1;
+
+// let ret = x(sum2, sum)(6)
+// console.log("ret=>", ret)
+
+// Pass By Value, Pass By Reference//
+/*
+let a = 10;
+let b = a;
+b = 8
+console.log("a", a, "b", b)*/
+
+// let arr1 = [1, 2, 3];
+// let arr2 = [...arr1] //clone it
+//let arr2 = [].concat(arr1);// old way
+// arr2[1] = 5;
+// console.log('arr1', arr1, "arr2", arr2)
+
+// let obj = { a: 10 }
+// let obj2 = { ...obj };
+// let obj2 = Object.assign({}.obj1) // old way
+// obj2.a = 15
+// console.log(obj, obj2)
+
+// Objects
+// let a = "city";
+// let b = 'name';
+// let valuename = 'John';
+// let obj = {
+//     [b]: valuename,
+//     age: 25,
+//     lastname: 'Due',
+//     getFullName: function () {
+//         return this[b] + " " + this.lastname
+//     },
+//     [a]: "Ramat Gan"
+// }
+// let obj1 = new Object();
+
+// console.log("obj", obj);
+// let name = obj.name;
+// let lname = obj["lastname"]
+// console.log('name', name, "lastname", lname);
+// let f = obj.getFullName(name, lname);
+// obj.address = 'Bezalel 4'
+// console.log("f", f)
+// console.log(obj)
+
+let name = 'John';
+let email = "bla@gmail.com"
+let obj = {
+    name: name,
+    // name,
+    email
+}
+console.log('obj', obj)
+
+for (let x in obj) {
+    console.log(`${x} ${obj[x]}`);
+}
+
+Object.keys(obj);
+Object.values(obj);
+Object.entries(obj);//keys and values in arrays
