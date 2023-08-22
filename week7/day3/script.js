@@ -212,7 +212,7 @@ function makeJuice(size) {
 
     addIngredients("apple", "orange", "carrot");
     addIngredients("strawberry", "banana", "pineapple");
-
+    // // Create a new inner function named displayJuice that displays on the DOM a sentence like The client wants a <size drink> juice, containing <first ingredient>, <second ingredient>, <third ingredient>".
     function displayJuice() {
         const juiceSentence = `The client wants a ${size} juice, containing ${ingredients.join(", ")}`;
         console.log(juiceSentence);
