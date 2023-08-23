@@ -1,0 +1,48 @@
+// for each 
+const myArray = [2, 3, 4, 5, 6]
+myArray.forEach((element, index) => {
+    console.log(`Element: ${element} at position ${index}`);
+    console.log(`Element: ${element} at position ${index}`);
+})
+
+myArray.forEach((element, index, arr) => {
+    arr[index] = arr[index] * 2;
+})
+
+console.log(myArray);
+
+const numbers = [10, 11, 12, 15, 20]
+numbers.forEach(number => {
+    if (number % 2 === 0) {
+        console.log(number);
+    }
+});
+
+// some method
+myArray.some((value) => value % 2 == 0);
+
+const words = ['wow', 'hey', 'bye']
+
+const startsWithH = words.some(word => word.charAt(0) === 'h');
+
+if (startsWithH) {
+    console.log("At least one word starts with 'h'");
+} else {
+    console.log("No word starts with 'h'");
+}
+
+const startsWithLetterH = words.some(word => word.startsWith('h'));
+
+if (startsWithLetterH) {
+    console.log("At least one word starts with 'h'");
+} else {
+    console.log("No word starts with 'h'");
+}
+
+// Every method
+
+const allBiggerZero = myArray.every((value) => value < 8);
+
+console.log(allBiggerZero);
+
+//map
