@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    border: 1px solid gray;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    background-color: darkgrey;
+    padding: 0.5rem;
+}
+
+#container>* {
+    border: 1px solid lightgray;
+}
+
+#sidebar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    gap: 0.5rem;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+
+}
+
+#sidebar .clear {
+    grid-column: 1 / -1;
+}
+
+#sidebar .clear button {
+    height: 100%;
+    width: 100%;
+    border-radius: 0.25rem;
+}
+
+#sidebar>* {
+    border: 1px solid black;
+}
+
+#main {
+    display: grid;
+    grid-template-columns: repeat(60, 1fr);
+}
+
+#main>* {
+    border: 1px solid darkgrey;
+    background-color: white;
+}

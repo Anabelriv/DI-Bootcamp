@@ -12,19 +12,23 @@ const searchInput = document.getElementById("searchInput");
 const gifContainer = document.getElementById("gifContainer");
 const deleteAllButton = document.getElementById("deleteAll");
 
+//the input on submit check it's not empty and trim empty spaces, calls the fetch random gif function
 searchForm.addEventListener("submit", async function (event) {
     event.preventDefault();
     const searchTerm = searchInput.value.trim();
     if (searchTerm !== "") {
         const gifData = await fetchRandomGif(searchTerm);
         displayGif(gifData);
+        console.log(gifData)
     }
 });
 
+//replaces the gifContainer to leave it empty 
 deleteAllButton.addEventListener("click", function () {
     gifContainer.innerHTML = "";
 });
 
+// using the search function fetch randomgif 
 async function fetchRandomGif(searchTerm) {
     const response = await fetch(`https://api.giphy.com/v1/gifs/random?api_key=${apiKey}&tag=${searchTerm}`);
     if (!response.ok) {
@@ -34,27 +38,24 @@ async function fetchRandomGif(searchTerm) {
     return data.data;
 }
 
+// display the gif extracts details from the gifData:URL, Category uses the title info and checks if it's empty to say "Unknown"
 function displayGif(gifData) {
     const gifUrl = gifData.images.original.url;
     const category = gifData.title || "Unknown";
-
+    //create an element and add appending the child gif Image
     const gifDiv = document.createElement("div");
     gifDiv.classList.add("gif");
 
     const gifImage = document.createElement("img");
     gifImage.src = gifUrl;
     gifDiv.appendChild(gifImage);
-
+    //delete each gif if requested removing the appended child
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
     deleteButton.addEventListener("click", function () {
         gifDiv.remove();
     });
     gifDiv.appendChild(deleteButton);
-
-    const categoryText = document.createElement("p");
-    categoryText.textContent = `Category: ${category}`;
-    gifDiv.appendChild(categoryText);
 
     gifContainer.appendChild(gifDiv);
 }
