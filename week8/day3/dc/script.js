@@ -38,10 +38,9 @@ async function fetchRandomGif(searchTerm) {
     return data.data;
 }
 
-// display the gif extracts details from the gifData:URL, Category uses the title info and checks if it's empty to say "Unknown"
+// display the gif extracts details from the gifData:URL
 function displayGif(gifData) {
     const gifUrl = gifData.images.original.url;
-    const category = gifData.title || "Unknown";
     //create an element and add appending the child gif Image
     const gifDiv = document.createElement("div");
     gifDiv.classList.add("gif");
