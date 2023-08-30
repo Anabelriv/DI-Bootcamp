@@ -47,7 +47,7 @@ async function updateInfo(resp) {
             }
 
             const data = await response.json();
-            updateInfo(data);
+            // updateInfo(data);
             homeWorld.innerText = `Home World: ${data.name}`;
         }
 
