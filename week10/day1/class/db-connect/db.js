@@ -6,7 +6,7 @@ const db = knex({
         host: 'lucky.db.elephantsql.com',
         port: 5432,
         user: 'kncwsunc',
-        password: 'sdkTBD7O5KEzKlL144UKopU_8dz1Ri8i',
+   
         database: 'kncwsunc'
     }
 });
